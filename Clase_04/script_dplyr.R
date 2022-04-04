@@ -109,15 +109,20 @@ tidy_data %>% group_by(Especie) %>%
 
 # FUNCIÓN MUTATE()
 # Permite calcular nuevas variables "derivadas", ej. proporciones, tasas, log.
-
 tidy_data %>% select(Especie, Peso, parasitos) %>% 
   mutate(Densidad_parasitos = parasitos/Peso)
+
+# EJERCICIO
+# Usando mutate() genere las variables derivadas logaritmo del peso y log+1 del número de parásitos.
 
 # HACER PLOT CON GGPLOT2
 ggplot(tidy_data, aes(x=Peso, y=parasitos))+
   geom_point(size= I(2))+
   labs(x= "Peso(g)", y= "Número de parásitos")+
   theme_bw()
+
+# EJERCICIO
+# Realice un gráfico de puntos para visualizar la relación entre el log+1 de parásitos en función del logaritmo del peso.
 
 
 
