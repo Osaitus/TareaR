@@ -1,7 +1,8 @@
 ---
 title: "Clase 07 - Reportes dinámicos con Rmarkdown."
 subtitle: 'DBT 845 - Investigación reproducible y análisis de datos biotecnológicos con R.'
-author: Dr. José Gallardo Matus | https://genomics.pucv.cl/ 
+author: Dr. José Gallardo Matus 
+institution: Pontificia Universidad Católica de Valparaíso
 date: "`r format(Sys.time(), '%d %B %Y')`"
 output: 
   beamer_presentation:

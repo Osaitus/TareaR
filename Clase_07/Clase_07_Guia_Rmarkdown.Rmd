@@ -1,6 +1,6 @@
 ---
 title: "Guía de trabajo Rmarkdown"
-subtitle: 'Curso Análisis de datos con R para Biociencias'
+subtitle: 'DBT 845 - Investigación reproducible y análisis de datos biotecnológicos con R.'
 author:
  name: Dr. José A. Gallardo y Dra. María Angélica Rueda.
  affiliation: Pontificia Universidad Católica de Valparaíso
@@ -51,7 +51,7 @@ pre {
 
 Una de las versatilidades de **Rmarkdown** es que puede pasar de análizar sus datos, a realizar un reporte profesional para sus usuarios o clientes sin necesidad de copiar o pegar a otro documento o usar otro software. 
 
-[**_knitr_**](https://yihui.org/knitr/) es la librería clave que utliza **Rmarkdown** puede generar reportes dinámicos. **knitr** fue desarrollada por Yihui Xie en 2012 y su contribución a la investigación reproducible ha sido significativa.
+[**_knitr_**](https://yihui.org/knitr/) es el paquete clave que utiliza **Rmarkdown** puede generar reportes dinámicos. **knitr** fue desarrollada por Yihui Xie en 2012 y su contribución a la investigación reproducible ha sido significativa.
 
 **[YAML](https://es.wikipedia.org/wiki/YAML)** es un lenguaje simple de programación que permite describir datos. Se usa como herramienta para configurar el **metadata** de un reporte dinámico en Rmarkdown. 
 
@@ -65,6 +65,9 @@ Respecto de un **_script_** tradicional de **R**, los script de Rmarkdown presen
 
 **3**. Los códigos se deben incluir en bloques, también llamados **Chunk**. Los chunk pueden tener un nombre identificador y mediante algunos argumentos específicos definir las características de ese bloque en particular, como por ejemplo, que el código se incluya o no en el reporte, o para agregar alguna leyenda a las figuras.
 
+Use esta [Hoja de referencia](https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf) como ayuda para elaborar reportes Rmarkdown.
+
+Use está guía de sintaxis de **Markdown** para mejorar el estilo de sus documentos [Rmarkdown](https://rstudio-pubs-static.s3.amazonaws.com/330387_5a40ca72c3b14824acedceb7d34618d1.html).
 
 ### **Objetivos de aprendizaje**
 
@@ -73,7 +76,6 @@ Los objetivos de aprendizaje de esta guía son:
 **1**. Iniciar un proyecto de análisis de datos y escribir un código de programación o **_script_** con **[Rmarkdown](https://rmarkdown.rstudio.com/)**.
 
 **2**. Elaborar reportes dinámicos con **Rmarkdown**.
-
 
 ## **Ejercicios**
 
@@ -95,7 +97,7 @@ Ahora, cree su propio **_script_** para elaborar un reporte usando la barra de h
 knitr::include_graphics("Fig1_Setup_Rmarkdown.png")
 ```
 
-Luego guarde inmediatamente su script como **script_6_nombre_apellido.Rmd**.  
+Luego guarde inmediatamente su script como **script_Rmarkdwon_nombre_apellido.Rmd**.  
 
 ## **Ejercicio 3.** **Trabajando con la plantilla de Rmarkdown** 
 
@@ -109,7 +111,6 @@ En el primer bloque de códigos o **chunk** asegúrese de que los comandos está
 knitr::opts_chunk$set(echo = FALSE)
 library(stats)
 ```
-
 
 ## **Ejercicio 5.** **Borrar información de la plantilla**
 
@@ -154,7 +155,3 @@ plot(BOD$Time ~ BOD$demand, xlab = "Time (days)", ylab = "Demand (mg/l)",
 ### **Ejercicio 10.** **Imprimir reportes dinámicos**
 
 Finalmente imprima diferentes versiones de su reporte (pdf, word, html) con el botón **Knit**.
-
-Use esta [Hoja de referencia](https://github.com/rstudio/cheatsheets/raw/master/translations/spanish/rmarkdown-2.0_Spanish.pdf) como ayuda para elaborar reportes Rmarkdown.
-
-Use está guía de sintaxis de **Markdown** para mejorar el estilo de sus documentos [Rmarkdown](https://rstudio-pubs-static.s3.amazonaws.com/330387_5a40ca72c3b14824acedceb7d34618d1.html).

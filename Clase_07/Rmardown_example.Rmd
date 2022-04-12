@@ -1,172 +1,131 @@
 ---
-title: "Análisis de ordenes de compra Megacentro - 2021"
-author: "Yovanessa Arrué | Pontificia Universidad Católica de Valparaíso | <yovanessa.arrue@pucv.cl>"
+title: "Ejemplo reporte pdf con Rmarkdown"
+author: "Dr. José A. Gallardo | <jose.gallardo@pucv.cl>"
 date: "`r format(Sys.time(), '%d %B %Y')`"
-output: 
+institution: Pontificia Universidad Católica de Valparaíso
+output:
   pdf_document: default
+  html_document:
+    df_print: paged
+  word_document: default
+subtitle: DBT 845 - Investigación reproducible y análisis de datos biotecnológicos con R.
 ---
 
-## INTRODUCCIÓN
+## Metadata
 
+Este script contiene toda la información necesaria para generar un reporte dinámico en formato pdf. Al inicio de este documento usted puede observar la **metadata** en formato **YAML**. Note que hemos agregado un *subtítulo*, un formato de fecha dinámica que establece la fecha del día que se imprime el reporte y el formato pdf con el comando **output**.
+
+## Markdown
+
+Este texto que usted lee ahora se denomina markdown y puede modificarlo a voluntad cuando escriba un reporte, agregando todo tipo de formatos, así como tablas, listas, párrafos o referencias. 
+
+**Título con diferente tamaño**
+
+En markdown # indica un título.
+
+Para reducir el tamaño de los título agregando más #
+
+    # Titulo
+    ## Título
+    ### Título
+    
+# Titulo
+## Título
+### Título
+
+**Ejemplo uso de viñetas o listas numeradas**
+
+Puede agregar listas como lo hace habitualmente en word.
+
+    - Elemento 1
+    - Elemento 2
+    - Elemento 3
+    
+- Elemento 1
+- Elemento 2
+- Elemento 3
+
+**Ejemplo escribir en negrita o cursiva**
+
+Puede dar formato de negrita o cursiva usando uno o dos ** a cada lado de la palabra.
+
+    **Esto va en negrita**  
+    *Esto va en cursiva*  
+    
+**Esto va en negrita**  
+*Esto va en cursiva*  
+
+**Comando saltos de página**  
+Puedes dar saltos de página para dar formato a tu reporte con el siguiente comando
+
+    \newpage
+    
+**Ejemplo para crear tablas**
+
+Puede crear tablas usando barras espaciadoras y guiones como en el siguiente ejemplo
+
+    | Variable A | Variable B | Variable C |
+    | :-- | :--: | --: |
+    | A1 | B1 |  C1 |
+    | A2 | B2 | C2 |
+    
+| Variable A | Variable B | Variable C |
+| :-- | :--: | --: |
+| A1 | B1 |  C1 |
+| A2 | B2 | C2 |
+
+## Bloques de código o chunk
+
+La principal diferencia de Markdown con Rmarkdown es obviamente la posibilidad de incluir códigos de R para analizar datos. Esto se consigue agregando bloques de códigos como el que se muestra a continuación. Observe con detención que el bloque de códigos comienza y termina con 3 tildes invertidas **```** y que al inicio hay una r entre dos **{}** lo que indica al software que es un código de **R**. Éste primer bloque es para configurar el resto de los bloques de código, por eso se ha incluido un nombre **setup**. En este primer **chunk** puede ver el llamado a ejecutar la librería **knitr**.
 
 ```{r setup, include=FALSE}
 # Este bloque de códigos se llama setup y configura el resto de los bloques.
 
-# El comando include=FALSE da la instrucción de que este bloque  aparezca en el reporte.
+# El comando include=FALSE da la instrucción de que este bloque no aparesca en el reporte.
 
-# El comando echo=TRUE da la instrucción de que los siguientes bloques
-# si aparezcan en el reporte.
+# El comando echo=TRUE da la instrucción de que los siguientes bloques si aparescan en el reporte.
 
 knitr::opts_chunk$set(echo = TRUE)
-
-# Instala lbrerías
-library(knitr)
-library(tidyr)
 ```
 
+Cuando trabajes con bloques de códigos para analizar tus datos, también puedes agregar el nombre del bloque del código, en este caso usaremos de ejemplo el set de datos **BOD**. 
 
-\newpage
+Mientras que para ejecutar un bloque de código, debes presionar **la punta de flecha verde o play** que se observa en la parte superior derecha del mismo bloque de códigos.
 
-## PRUEBAS ESTADÍSTICAS NO PARAMÉTRICAS
-
-Las pruebas estadísticas no paramétricas son un conjunto diverso de pruebas estadísticas que se aplican usualmente para variables cuantitativas que no cumplen con el supuesto de normalidad y para variables cualitativas. El concepto de “no paramétrico” a veces es confuso, pues los métodos no paramétricos si estiman y someten a prueban hipótesis usando parámetros, pero no los de distribución normal.
-
-### PRUEBA DE CORRELACIÓN DE SPEARMAN
-
-La prueba de correlación de Spearmanse utiliza para estudiar la asociación de dos variables, cuando no se cumple uno o varios supuestos de la correlación paramétrica:    
-
-1 Las variables X e Y no son continuas.  
-2 No existe relación lineal.  
-3 La distribución conjunta de (X, Y) no es una distribución Bivariable normal.  
-
-En el siguiente ejemplo se realizará una prieba no paramétrica de Spearman al set de datos de la siguiente tabla.
-```{r Spearman data}
-# Este bloque de códigos se llama resumen Spearman test.
-
-# Crea objetos X e Y 
-X <- c(942,101,313,800)
-Y <- c(13,14,18,10)
-cor_data <- data.frame(X,Y)
-
-# Imprime una tabla con knitr
-
-kable(cor_data, caption = "Set de datos de correlación", col.names = c("weight","lice"))
+```{r, resumen BOD}
+# Este bloque de códigos se llama resumen BOD.
+summary(BOD)
 ```
-
-La hipótesis que se someterá a prueba es la siguiente.
-
-**H~0~**: weight y lice son mutuamente independientes, $\rho$ = 0  
-**H~1~**: weight y lice no son mutuamente independientes, $\rho$ $\ne$ 0  
-
-
-```{r Spearman test}
-# Realiza test de correlación
-cor_test <- cor.test(X,Y, method = "spearman",
-         alternative = "two.sided")
-```
-
-La correlación de spearman entre **weight** y **lice** toma un valor de **$\rho$ = `r cor_test$estimate`**, no obstante aquello, no es posible rechazar la hipótesis nula pues el valor de **p= `r round(cor_test$p.value,2)`**.
-
-\newpage
-
-### COMPARACIÓN DE DOS O MÁS MUESTRAS
-
-**2 Muestras independientes**
-
-La prueba de Mann-Whitney o Wilcoxon sirve para comparar dos muestras independientes con idéntica distribución, con diferentes medianas y cuando no se cumple el supuesto de normalidad o de variable continua.
-
-```{r, echo=TRUE}
-# Minutos de conducta agresiva (t= solo machos; c= machos y hembras)
-
-t <- c(9, 12, 13)
-c <- c(0, 4, 6)
-m_data <- data.frame(t,c)
-
-
-# Imprime una tabla con knitr
-kable(m_data, caption = "Set de datos de correlación", 
-      col.names = c("tratamiento","control"))
-
-```
-
-```{r}
-# Realiza prueba de Mann-Whitney
-wil_test <- wilcox.test(t, c, alternative = "g",
-            paired = FALSE)
-
-wil_test
-```
-
-**2 Muestras pareadas**
-
-La prueba de Wilcoxon también sirve para comparar dos muestras pareadas.
-
-```{r, echo=TRUE}
-# Nivel de hormona pre y post maduración
-pre <- c(45, 41, 47, 52)
-post <- c(49, 50, 52, 50)
-
-# Realiza prueba de Wilcoxon
-wilcox.test(post - pre, alternative = "greater")
-# no es necesario indicar muestras pareadas
-# pues estamos haciendo la resta en la función.
-
-```
-
-**Mas de 2 muestras independientes**
-
-La prueba de Kruskal - wallis es el gold standar para comparar múltiples muestras con idéntica distribución, con diferentes medianas y sin normalidad.
-
-```{r, echo=TRUE}
-
-# Score de calidad de producto congelado 1 (peor) - 9 (mejor)
-
-d0 <- c(9,8,9,8) # day0
-d4 <- c(7,7,6,8) # day4 
-d8 <- c(6,5,5,6) # day8
-
-calidad <- data.frame(d0, d4, d8)
-
-kable(calidad, caption = "Score de calidad por día", 
-      col.names = c("día 0","día 4", "día 8"))
-
-```
-
-
-```{r datos calidad}
-
-# Este bloque de códigos se llama datos calidad.
-
-grafica <- gather(data = calidad, key = "Dias", value = "Score de calidad", 1:3)
-
-
-
-kable(grafica, caption = "Score de calidad por día")
-
-```
-
-\newpage
 
 También puedes incluir y dar nombre a las gráficas en el mismo bloque de código usando el comando **fig.cap=""**.
 
-```{r gráfica calidad, echo=FALSE, fig.cap="Calidad de producto a diferentes tiempos de congelación"}
+```{r gráfica BOD, echo=FALSE, fig.cap="Demanda biológica de oxígeno en función del tiempo"}
 
-# Este bloque de códigos se llama gráfica gráfica calidad.
+# Este bloque de códigos se llama gráfica BOD.
 
 # El comando echo=FALSE impide que se imprima el bloque en el reporte.
 
 # El comando fig.cap="" sirve para agregar el nombrar y numerar la figura.
 
-boxplot(grafica$`Score de calidad` ~ grafica$Dias, xlab = "Días de congelamiento", 
-        ylab = "Score de calidad")
+plot(BOD$demand~BOD$Time)
 
 ```
 
 
-```{r}
-kruskal.test(list(d0, d4, d8))
-```
+\newpage
+    
+    
+## Librerías de R
 
+Una de las fortalezas de R es que existen miles de librerías para realizar análisis de datos. Algunas están pre-instaladas pero otras no.
+
+A continuación, se presentan algunos comandos para revisar las librerías que están instaladas y habilitadas para trabajar.
+
+```{r librerias habilidatas}
+# Este comando permite revisar que librerías están "habilitadas"
+# y listas para usar en tu ambiente de trabajo.
+search()
+```
 
 ### Imprimir el reporte
 
@@ -174,6 +133,6 @@ Finalmente, para poder generar un reporte debes presionar el **triángulo negro*
 
 Para finalizar, puedes generar dos reportes adicionales uno en formato html y otro en formato word. Compare los documentos e identifique sus diferencias.
 
-Para más detalles de como trabajar con Rmarkdown investigue el siguiente [**enlace**](https://swcarpentry.github.io/r-novice-gapminder-es/15-knitr-markdown/).
+Para más detalles de como trabajar con Rmarkdown investigue el siguiente [link](https://swcarpentry.github.io/r-novice-gapminder-es/15-knitr-markdown/).
 
 
