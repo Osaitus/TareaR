@@ -30,9 +30,9 @@ Investigador post-doctoral de la Pontificia Universidad Católica de Valparaíso
 
 **UNIDAD 1. INVESTIGACIÓN REPRODUCIBLE Y ANÁLISIS EXPLORATORIO DE DATOS**. 
 
-Palabras clave: Reproducibilidad, R, Rstudio, Rmarkdown, Github, variables aleatorios, distribución de probabilidad.
+**Palabras clave**: Reproducibilidad, R, Rstudio, Rmarkdown, Github, variables aleatorios, distribución de probabilidad.
 
-Subtópicos
+**Subtópicos**  
 Subtópico 1.1.- Investigación reproducible con R, Rmarkdown y Github.   
 Subtópico 1.2.- Variables aleatorias y distribuciones de probabilidad.  
 Subtópico 1.3.- Análisis exploratorio de datos.  
@@ -41,7 +41,7 @@ Subtópico 1.3.- Análisis exploratorio de datos.
 
 Palabras clave: Parámetro, estadístico, correlación, permutación, combinación, inferencia estadística, contraste de hipótesis, análisis de supervivencia.
 
-Subtópicos
+**Subtópicos**  
 Subtópico 2.1.- Pruebas de contraste de hipótesis paramétrica.   
 Subtópico 2.2.- Pruebas de contraste de hipótesis no paramétrica.  
 Subtópico 2.3.- Análisis de supervivencia.  
@@ -50,7 +50,7 @@ Subtópico 2.3.- Análisis de supervivencia.
 
 Palabras clave: Regresión lineal, regresión lineal múltiple, regresión cuadrática, regresión logística y análisis multivariado.
 
-Subtópicos
+**Subtópicos**  
 Subtópico 3.1.- Modelos lineales.   
 Subtópico 3.2.- Modelos lineales generalizados.  
 Subtópico 3.3.- Análisis multivariado.  
