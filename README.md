@@ -2,7 +2,7 @@
 
 **DIRIGIDO A:**
 
-Alumnos del [Doctorado en Biotécnología](http://www.doctoradoenbiotecnologia.cl/).  
+Alumnos del [Doctorado en Biotecnología](http://www.doctoradoenbiotecnologia.cl/).  
 Programa conjunto entre la Pontificia Universidad Católica de Valparaíso (PUCV) y la Universidad Técnica Federico Santa María (UTFSM).
 Valparaíso, Chile.
 
