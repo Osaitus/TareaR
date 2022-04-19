@@ -29,6 +29,8 @@ Investigador post-doctoral de la Pontificia Universidad Católica de Valparaíso
 **ALUMNOS**
 [**JOSÉ ANDRÉS GALLARDO MATUS**](https://github.com/DrJoseGallardo)
 
+[**Carlos Gutiérrez Ferreira**](https://github.com/CarlosGutierrezFerreira)
+
 **CONTENIDOS CENTRALES**
 
 **UNIDAD 1. INVESTIGACIÓN REPRODUCIBLE Y ANÁLISIS EXPLORATORIO DE DATOS**.
