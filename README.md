@@ -26,6 +26,8 @@ Doctora en Ciencias Agropecuarias por la Universidad Nacional de Córdoba, Argen
 Licenciada en Matemáticas por la Universidad Industrial de Santander, Colombia.  
 Investigador post-doctoral de la Pontificia Universidad Católica de Valparaíso, Chile.  
 
+**ALUMNOS**
+
 **CONTENIDOS CENTRALES**
 
 **UNIDAD 1. INVESTIGACIÓN REPRODUCIBLE Y ANÁLISIS EXPLORATORIO DE DATOS**. 
