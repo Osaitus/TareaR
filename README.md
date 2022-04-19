@@ -27,7 +27,20 @@ Licenciada en Matemáticas por la Universidad Industrial de Santander, Colombia.
 Investigador post-doctoral de la Pontificia Universidad Católica de Valparaíso, Chile.  
 
 **ALUMNOS**
+
 [**DANIELA VALENTINA LOPEZ PEREZ**](https://github.com/Danielalpez) 
+
+
+[**JOSÉ ANDRÉS GALLARDO MATUS**](https://github.com/DrJoseGallardo)
+
+[**Carlos Gutiérrez Ferreira**](https://github.com/CarlosGutierrezFerreira)
+
+[**JAQUELINE FLORES SALINAS**](https://github.com/JaquelineFloresS)
+
+
+[**EDUARDO SÁNCHEZ CARVAJAL**](https://github.com/EduardoSzC)
+
+
 **CONTENIDOS CENTRALES**
 
 **UNIDAD 1. INVESTIGACIÓN REPRODUCIBLE Y ANÁLISIS EXPLORATORIO DE DATOS**.
