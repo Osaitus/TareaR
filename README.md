@@ -27,9 +27,13 @@ Licenciada en Matemáticas por la Universidad Industrial de Santander, Colombia.
 Investigador post-doctoral de la Pontificia Universidad Católica de Valparaíso, Chile.  
 
 **ALUMNOS**
+<<<<<<< Updated upstream
 [**JOSÉ ANDRÉS GALLARDO MATUS**](https://github.com/DrJoseGallardo)
 
 [**Carlos Gutiérrez Ferreira**](https://github.com/CarlosGutierrezFerreira)
+=======
+[**JAQUELINE FLORES SALINAS**](https://github.com/JaquelineFloresS)
+>>>>>>> Stashed changes
 
 **CONTENIDOS CENTRALES**
 
