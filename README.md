@@ -27,10 +27,11 @@ Licenciada en Matemáticas por la Universidad Industrial de Santander, Colombia.
 Investigador post-doctoral de la Pontificia Universidad Católica de Valparaíso, Chile.  
 
 **ALUMNOS**
+[**PAULA VALENZUELA AVILÉS**](https://github.com/PaulaValenzuelaaviles)
 
 **CONTENIDOS CENTRALES**
 
-**UNIDAD 1. INVESTIGACIÓN REPRODUCIBLE Y ANÁLISIS EXPLORATORIO DE DATOS**. 
+**UNIDAD 1. INVESTIGACIÓN REPRODUCIBLE Y ANÁLISIS EXPLORATORIO DE DATOS**.
 
 **Palabras clave**: Reproducibilidad, R, Rstudio, Rmarkdown, Github, variables aleatorios, distribución de probabilidad.
 
@@ -39,7 +40,7 @@ Subtópico 1.1.- Investigación reproducible con R, Rmarkdown y Github.
 Subtópico 1.2.- Variables aleatorias y distribuciones de probabilidad.  
 Subtópico 1.3.- Análisis exploratorio de datos.  
 
-**UNIDAD 2. PRUEBAS DE CONTRASTES DE HIPÓTESIS PARAMÉTRICAS Y NO PARAMÉTRICAS**. 
+**UNIDAD 2. PRUEBAS DE CONTRASTES DE HIPÓTESIS PARAMÉTRICAS Y NO PARAMÉTRICAS**.
 
 Palabras clave: Parámetro, estadístico, correlación, permutación, combinación, inferencia estadística, contraste de hipótesis, análisis de supervivencia.
 
@@ -56,5 +57,3 @@ Palabras clave: Regresión lineal, regresión lineal múltiple, regresión cuadr
 Subtópico 3.1.- Modelos lineales.   
 Subtópico 3.2.- Modelos lineales generalizados.  
 Subtópico 3.3.- Análisis multivariado.  
-
-
