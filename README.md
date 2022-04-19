@@ -39,6 +39,8 @@ Investigador post-doctoral de la Pontificia Universidad Católica de Valparaíso
 
 
 
+[**EDUARDO SÁNCHEZ CARVAJAL**](https://github.com/EduardoSzC)
+
 **CONTENIDOS CENTRALES**
 
 **UNIDAD 1. INVESTIGACIÓN REPRODUCIBLE Y ANÁLISIS EXPLORATORIO DE DATOS**.
