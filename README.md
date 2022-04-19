@@ -28,6 +28,8 @@ Investigador post-doctoral de la Pontificia Universidad Católica de Valparaíso
 
 **ALUMNOS**
 
+Carlos Gutiérrez Ferreira | https://github.com/CarlosGutierrezFerreira
+
 **CONTENIDOS CENTRALES**
 
 **UNIDAD 1. INVESTIGACIÓN REPRODUCIBLE Y ANÁLISIS EXPLORATORIO DE DATOS**. 
