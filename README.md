@@ -27,10 +27,7 @@ Licenciada en Matemáticas por la Universidad Industrial de Santander, Colombia.
 Investigador post-doctoral de la Pontificia Universidad Católica de Valparaíso, Chile.  
 
 **ALUMNOS**
-[**JOSÉ ANDRÉS GALLARDO MATUS**](https://github.com/DrJoseGallardo)
-
-[**Carlos Gutiérrez Ferreira**](https://github.com/CarlosGutierrezFerreira)
-
+[**DANIELA VALENTINA LOPEZ PEREZ**](https://github.com/Danielalpez) 
 **CONTENIDOS CENTRALES**
 
 **UNIDAD 1. INVESTIGACIÓN REPRODUCIBLE Y ANÁLISIS EXPLORATORIO DE DATOS**.
