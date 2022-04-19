@@ -28,7 +28,7 @@ Investigador post-doctoral de la Pontificia Universidad Católica de Valparaíso
 
 **ALUMNOS**
 
-Carlos Gutiérrez Ferreira | https://github.com/CarlosGutierrezFerreira
+[**Carlos Gutiérrez Ferreira**](https://github.com/CarlosGutierrezFerreira)
 
 **CONTENIDOS CENTRALES**
 
