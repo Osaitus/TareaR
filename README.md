@@ -27,7 +27,17 @@ Licenciada en Matemáticas por la Universidad Industrial de Santander, Colombia.
 Investigador post-doctoral de la Pontificia Universidad Católica de Valparaíso, Chile.  
 
 **ALUMNOS**
+
 [**PAULA VALENZUELA AVILÉS**](https://github.com/PaulaValenzuelaaviles)
+
+
+[**JOSÉ ANDRÉS GALLARDO MATUS**](https://github.com/DrJoseGallardo)
+
+[**Carlos Gutiérrez Ferreira**](https://github.com/CarlosGutierrezFerreira)
+
+[**JAQUELINE FLORES SALINAS**](https://github.com/JaquelineFloresS)
+
+
 
 **CONTENIDOS CENTRALES**
 
