@@ -28,7 +28,11 @@ Investigador post-doctoral de la Pontificia Universidad Católica de Valparaíso
 
 **ALUMNOS**
 
+
 [**DANIELA VALENTINA LOPEZ PEREZ**](https://github.com/Danielalpez) 
+
+[**PAULA VALENZUELA AVILÉS**](https://github.com/PaulaValenzuelaaviles)
+
 
 
 [**JOSÉ ANDRÉS GALLARDO MATUS**](https://github.com/DrJoseGallardo)
