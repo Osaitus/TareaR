@@ -14,6 +14,6 @@ El proyecto busca caracterizar un set de proteinas, buscando distintos valores p
 
 **Variables de estudio**
 
-Distintos valores de caracterisacion para cada proteina (numeros)
-secuencias de peptidos (caracteres)
+1. Distintos valores de caracterisacion para cada proteina (numeros)
+2. Secuencias de peptidos (caracteres)
    
