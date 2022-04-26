@@ -12,4 +12,4 @@ Archivo excel con secuencias de epitopes con distintas actividades
 
 los archivos agregados son para hacer los calculos, de ellos me concentraré en 4 secuencias especificas para comenzar a obtener informacion
 
-**intento por windows**
+**intento por windows exitoso**
