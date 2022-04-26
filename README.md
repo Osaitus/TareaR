@@ -11,3 +11,5 @@ Archivo excel con secuencias de epitopes con distintas actividades
 **Datos agregados**
 
 los archivos agregados son para hacer los calculos, de ellos me concentraré en 4 secuencias especificas para comenzar a obtener informacion
+
+**intento por windows**
