@@ -16,4 +16,9 @@ El proyecto busca caracterizar un set de proteinas, buscando distintos valores p
 
 1. Distintos valores de caracterisacion para cada proteina (numeros)
 2. Secuencias de peptidos (caracteres)
-   
+3. capacidad anticongelante (factor en tabla)
+
+**AVANCE PROYECTO**
+
+1. La tabla con la que se trabajó tenia valores repetidos, los cuales no aportaban mucho al analisís, por lo que fueron removidas de la tabla con la que se trabajo en R.
+2. los datos son, hasta la fecha poco conclusos, la sobre abundancia de peptidos con capacidad anticongelante (AFP) en comparación con los pocos no anticongelantes (NO AFP) hacen que estos se vean abrumados y poco representados, pienso agregar peptidos que se que no son anticongelantes para la medicion, sin embargo, se puede ver algun patrón dentro de los peptidos anticongelantes en algunos analisís 
