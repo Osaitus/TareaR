@@ -57,7 +57,28 @@ summary(calcR)
 #NCHCRYO<-NCHCRYO + labs(title = "Net Charge", subtitle = "carga neta", caption = "fuente: mis calculos")#
 #print(NCHCRYO)#
 
+
 #HISTOGRAMAS#
+
+#PRUEBA CON FUNCION par()#
+#ESTO FUNCIONA PERO NO DIFERENCIA ENTRE "AFP" y "NO AFP"#
+par(mfrow = c(1, 2))
+hist(calcR$NCH, main = "Carga neta", xlab = "Carga neta")
+hist(calcR$IP, main = "Punto Isoelectrico", xlab = "Punto Isoelectrico")
+
+#ESTO TIRA ERROR#
+#Error in hist.default(., calcR$NCH, main = "Carga neta", xlab = "Carga neta") :
+#some 'x' not counted; maybe 'breaks' do not span range of 'x'
+
+calcR%>%filter(calcR$CRYO == "AFP") %>% hist(calcR$NCH, main = "Carga neta", xlab = "Carga neta")
+
+#ESTO NO FUNCIONA#
+par(mfrow = c(1, 2))
+ggplot(calcR, aes(x= NCH, color= CRYO)) + geom_histogram(bins = 20, alpha=0.50, position = "identity")+ labs(title = "Carga Neta")
+ggplot(calcR, aes(x= IP, color= CRYO)) + geom_histogram(bins = 20, alpha=0.50, position = "identity")+ labs(title = "Punto Isoelectrico")
+
+#CONSTRUCCION DE OBJETOS PARA INTENTAR EXPORTAR MAS DE UNO EN UN MISMO JPEG#
+#TAMPOCO FUNCIONÓ#
 
 NCHCRYO<- ggplot(calcR, aes(x= NCH, color= CRYO)) + geom_histogram(bins = 20, alpha=0.50, position = "identity")
 NCHCRYO<-NCHCRYO + labs(title = "Carga Neta")
@@ -114,9 +135,3 @@ B12<-ggplot(calcR, aes(x=CRYO, y=FAS5, fill=CRYO)) + geom_boxplot()
 B12<-B12+labs(title = "Flexibilidad Local")
 B13<-ggplot(calcR, aes(x=CRYO, y=FAS6, fill=CRYO)) + geom_boxplot()
 B13<-B13+labs(title = "Propiedades Electronicas")
-
-
-#NO CREO OCUPAR ESTOS#
-pairs.panels(calcR[,3:7], method = "pearson", hist.col = "red",  density = TRUE, font=2)
-pairs.panels(calcR[,8:12], method = "pearson", hist.col = "red",  density = TRUE, font=2)
-pairs.panels(calcR[,13:17], method = "pearson", hist.col = "red",  density = TRUE, font=2)
