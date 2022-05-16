@@ -27,6 +27,6 @@ Peptides (https://github.com/dosorio/Peptides/)
 
 **AVANCE PROYECTO**
 
-1. La tabla con la que se trabajó tenia valores repetidos, los cuales no aportaban mucho al analisís, por lo que fueron removidas de la tabla con la que se trabajo en R.
-2. Los datos son, hasta la fecha poco conclusos, la sobre abundancia de peptidos con capacidad anticongelante (AFP) en comparación con los pocos no anticongelantes (NO AFP) hacen que estos se vean abrumados y poco representados, pienso agregar peptidos que se que no son anticongelantes para la medicion, sin embargo, se puede ver algun patrón dentro de los peptidos anticongelantes en algunos analisís
-3. Tengo problemas implementando una forma de poner varios graficos en un solo archivo, la funcion par() no responde como esperaba, a pesar de tratar ya varias formas
+1. Aun no se puede poner varios graficos en una sola imagen
+2. Mas datos se agregaran a futuro para solucionar la diferencia entre AFP y NO AFP
+3. Aparte de propiedades anticongelantes, se agregaran otras propiedades una vez que esten los otros valores
