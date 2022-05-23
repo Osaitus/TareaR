@@ -20,44 +20,30 @@ library(forcats)
 #generacion datos a partir de read_xlsx#
 Datos<-read_xlsx("calcR.xlsx")
 
-#analisis de datos por medio de peptides#
-aIndex(seq = caract$DIGESTION)
-aIndex(seq = "MAS")
-fasgaiVectors(seq = caract$DIGESTION)
-write.table(aIndex(seq = caract$DIGESTION), file = "caract.xlsx", append = TRUE, col.names = NA, row.names = TRUE)
-ai<- data.frame(aIndex(seq = caract$DIGESTION),row.names = NULL, check.rows = FALSE, check.names = TRUE)
-head(ai)
-write.table( ai, file = "caract.xlsx")
-write.csv(ai, file = "caract")
-install.packages("writexl")
-write_xlsx(ai, path = caract)
-write_xlsx(ai, path = "caract")
-write.csv2(ai, "ai.csv")
-bo<- data.frame(boman(seq = caract$DIGESTION),row.names = NULL, check.rows = FALSE, check.names = TRUE)
-write.csv2(bo, "bo.csv")
-cha<- data.frame(charge(caract$DIGESTION, pH= 7, pKscale = "Sillero"),row.names = NULL, check.rows = FALSE, check.names = TRUE)
-write.csv2(cha, "cha.csv")
-cru<- data.frame(crucianiProperties(seq = caract$DIGESTION),row.names = NULL, check.rows = FALSE, check.names = TRUE)
-write.csv2(cru, "cru.csv")
-fas<- data.frame(fasgaiVectors(seq = caract$DIGESTION),row.names = NULL, check.rows = FALSE, check.names = TRUE)
-write.csv2(fas, "fas.csv")
-hi<- data.frame(hydrophobicity(seq = caract$DIGESTION, scale = "Kidera"),row.names = NULL, check.rows = FALSE, check.names = TRUE)
-write.csv2(hi, "hi.csv")
-mw<- data.frame(mw(seq = caract$DIGESTION, monoisotopic = FALSE),row.names = NULL, check.rows = FALSE, check.names = TRUE)
-write.csv2(mw, "mw.csv")
-pi<- data.frame(pI(seq = caract$DIGESTION, pKscale = "Murray"),row.names = NULL, check.rows = FALSE, check.names = TRUE)
-write.csv2(pi, "pi.csv")
-boman(seq = caract$DIGESTION)
-aIndex(seq = caract$DIGESTION)
-
-#lectura y analisís de la tabla creada con los datos obtenidos#
-summary(calcR)
-
 #transformación de formato para set de datos "CRYO" de caracter a factor#
-calcR$CRYO<-as.factor(calcR$CRYO)
+Datos$CRYO<-as.factor(Datos$CRYO)
+
+#analisis de datos por medio de peptides#
+
+ai<- data.frame(aIndex(seq = Datos$DIGESTION),row.names = NULL, check.rows = FALSE, check.names = TRUE)
+write.csv2(ai, "ai.csv")
+bo<- data.frame(boman(seq = Datos$DIGESTION),row.names = NULL, check.rows = FALSE, check.names = TRUE)
+write.csv2(bo, "bo.csv")
+cha<- data.frame(charge(Datos$DIGESTION, pH= 7, pKscale = "Sillero"),row.names = NULL, check.rows = FALSE, check.names = TRUE)
+write.csv2(cha, "cha.csv")
+cru<- data.frame(crucianiProperties(seq = Datos$DIGESTION),row.names = NULL, check.rows = FALSE, check.names = TRUE)
+write.csv2(cru, "cru.csv")
+fas<- data.frame(fasgaiVectors(seq = Datos$DIGESTION),row.names = NULL, check.rows = FALSE, check.names = TRUE)
+write.csv2(fas, "fas.csv")
+hi<- data.frame(hydrophobicity(seq = Datos$DIGESTION, scale = "Kidera"),row.names = NULL, check.rows = FALSE, check.names = TRUE)
+write.csv2(hi, "hi.csv")
+mw<- data.frame(mw(seq = Datos$DIGESTION, monoisotopic = FALSE),row.names = NULL, check.rows = FALSE, check.names = TRUE)
+write.csv2(mw, "mw.csv")
+pi<- data.frame(pI(seq = Datos$DIGESTION, pKscale = "Murray"),row.names = NULL, check.rows = FALSE, check.names = TRUE)
+write.csv2(pi, "pi.csv")
 
 #continuacion de analisís de datos#
-summary(calcR)
+summary(Datos)
 
 #HISTOGRAMAS#
 
