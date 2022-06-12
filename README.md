@@ -26,4 +26,4 @@ Peptides (https://github.com/dosorio/Peptides/)
 
 **AVANCE PROYECTO**
 
-se cambio el codigo y se avanzo con el analisis, todo en un documento markdown que muestra tanto el codigo utilizado como sus outputs, histogramas no fueron hechos ya que no daban mucha informacion y solo quedamos con boxplots de los valores tanto antes de la normalizacion como despues de esta, ademas se agregaron heatmaps como avance del proyecto
+Analisís de agrupación: se realizo en una primera instancia un analisis de heatmap con 3 a 11 clusters (analisís decia 6, pero se opto por mas para ver el comportamiento de los peptidos), despues de realizado el estudio, se vio que existian clusters donde no existian AFPs, entonses se realiza un sesgo donde se removieron los peptidos que no compartian cluster con los AFPs para cada heatmap, entonces se tiene ahora heatmap de 4 a 11 clusters con variaciones de peptidos entre cada uno, ahora se esta analisando la información 
