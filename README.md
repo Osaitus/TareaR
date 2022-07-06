@@ -26,4 +26,4 @@ Peptides (https://github.com/dosorio/Peptides/)
 
 **AVANCE PROYECTO**
 
-Analisís de agrupación: se realizo en una primera instancia un analisis de heatmap con 3 a 11 clusters (analisís decia 6, pero se opto por mas para ver el comportamiento de los peptidos), despues de realizado el estudio, se vio que existian clusters donde no existian AFPs, entonses se realiza un sesgo donde se removieron los peptidos que no compartian cluster con los AFPs para cada heatmap, entonces se tiene ahora heatmap de 4 a 11 clusters con variaciones de peptidos entre cada uno, ahora se esta analisando la información 
+6.7.2022: se agrega análisis de componentes principales, los descriptores usados, deacuerdo a lo mostrado, podrian ser en parte reemplazados, MW será reemplazado ya que su influencia sobre PC1 y PC2 es muy poca
