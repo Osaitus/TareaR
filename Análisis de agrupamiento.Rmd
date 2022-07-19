@@ -1,0 +1,252 @@
+---
+title: "Análisis de agrupamiento"
+author: "Javier espinoza"
+date: '2022-05-25'
+output:
+  html_document: default
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+## Librerias usadas
+
+```{r Librerias, echo=TRUE, message=FALSE, warning=FALSE}
+library(Peptides)
+library(tidyverse)
+library(cluster)
+library(factoextra)
+library(pheatmap)
+library(readxl)
+library(psych)
+```
+
+## Leer archivo fuente
+
+```{r}
+Lista_calculo <- read_excel("C:/Users/javeb/Documents/R/TESIS/BASES DE DATOS/Lista calculo.xlsx")
+View(Lista_calculo)
+```
+
+## Ahora a obtener los descriptores para despues mostrarlo en una tabla. 
+
+```{r echo=TRUE}
+peptideDescriptors <- data.frame(
+  Name = unlist(Lista_calculo$Name),
+  sequence = unlist(Lista_calculo$Sequence),
+  aIndex = aIndex(Lista_calculo$Sequence),
+  boman = boman(Lista_calculo$Sequence),
+  charge = charge(Lista_calculo$Sequence, pH = 7, pKscale = "Sillero"),
+  crucianiProperties = do.call(rbind.data.frame, crucianiProperties(Lista_calculo$Sequence)),
+  fasgaiVectors = do.call(rbind.data.frame, fasgaiVectors(Lista_calculo$Sequence)),
+  hydrophobicity = hydrophobicity(Lista_calculo$Sequence, scale="Kidera"),
+  pI = pI(Lista_calculo$Sequence, pKscale="EMBOSS"),mw = mw(Lista_calculo$Sequence))
+colnames(peptideDescriptors) <- c('Name','sequence', "aIndex", "Boman", "Charge", paste0('PP', 1:3), paste0('F', 1:6), "Hidrophobicity","pI", "MW")
+view(peptideDescriptors)
+Tabla = subset(peptideDescriptors, select = -c(sequence))
+knitr::kable(Tabla, caption = "**Tabla 1.** Descriptores")
+```
+
+## Se quita la primera y segunda fila
+
+```{r}
+datapep= subset(peptideDescriptors, select = -c(Name, sequence))
+view(datapep)
+boxplot(datapep)
+summary(datapep)
+```
+
+# Los datos no están balanceados, se procede a escalar
+
+```{r}
+pepscale = scale(datapep)
+summary(pepscale)
+boxplot(pepscale)
+```
+
+## Calculo de componentes principales y visualización
+
+```{r}
+PCApep = prcomp(pepscale)
+summary(PCApep)
+```
+
+## Para escoger el numero de PCAs
+
+```{r}
+stdev= PCApep$sdev
+pr_var = stdev^2
+pr_var[1:15] 
+prop_varex =pr_var/sum(pr_var)
+prop_varex[1:15]
+plot(prop_varex, xlab = "Principal Component",ylab = "Proportion of Variance Explained",type = "b")
+plot(cumsum(prop_varex), xlab = "Principal Component",ylab = "Cumulative Proportion of Variance Explained",type = "b")
+
+```
+
+
+## se determina que los 5 primeros componentes principales seran usados para los calculos. 
+
+
+## Determinar numero optimo de clusters por medio del metodo de "avarage silhouette"
+
+```{r}
+fviz_nbclust(PCApep$x[ ,1:15],kmeans,method = "silhouette", k.max = 30, iter.max=25)
+
+```
+
+## Graficar los datos por medio de heatmap 
+# Se hacen heatmaps desde 3 clusters hasta 11 clusters
+
+# Heatmap de 3 clusters
+```{r}
+cluster3pep= pheatmap(PCApep$x[,1:5], kmeans_k = 3,cluster_cols = FALSE, treeheight_row = 150, cellwidth = 15, color = colorRampPalette(c("blue", "white", "red"))(50),main = "Peptide Clustering Analysis" )
+
+write.csv2 (cluster3pep$kmeans$cluster, file="clustermember3pep.csv")
+
+```
+
+# Heatmap de 4 clusters
+```{r}
+cluster4pep= pheatmap(PCApep$x[,1:5], kmeans_k = 4,cluster_cols = FALSE, treeheight_row = 150, cellwidth = 15, color = colorRampPalette(c("blue", "white", "red"))(50),main = "Peptide Clustering Analysis" )
+
+write.csv2 (cluster4pep$kmeans$cluster, file="clustermember4pep.csv")
+
+```
+
+# Heatmap de 5 clusters
+```{r}
+cluster5pep= pheatmap(PCApep$x[,1:5], kmeans_k = 5,cluster_cols = FALSE, treeheight_row = 150, cellwidth = 15, color = colorRampPalette(c("blue", "white", "red"))(50),main = "Peptide Clustering Analysis" )
+
+write.csv2 (cluster5pep$kmeans$cluster, file="clustermember5pep.csv")
+
+```
+
+# Heatmap de 6 clusters
+```{r}
+cluster6pep= pheatmap(PCApep$x[,1:5], kmeans_k = 6,cluster_cols = FALSE, treeheight_row = 150, cellwidth = 15, color = colorRampPalette(c("blue", "white", "red"))(50),main = "Peptide Clustering Analysis" )
+
+write.csv2 (cluster6pep$kmeans$cluster, file="clustermember6pep.csv")
+
+```
+
+# Heatmap de 7 clusters
+```{r}
+cluster7pep= pheatmap(PCApep$x[,1:5], kmeans_k = 7,cluster_cols = FALSE, treeheight_row = 150, cellwidth = 15, color = colorRampPalette(c("blue", "white", "red"))(50),main = "Peptide Clustering Analysis" )
+
+write.csv2 (cluster7pep$kmeans$cluster, file="clustermember7pep.csv")
+
+```
+
+# Heatmap de 8 clusters
+```{r}
+cluster8pep= pheatmap(PCApep$x[,1:5], kmeans_k = 8,cluster_cols = FALSE, treeheight_row = 150, cellwidth = 15, color = colorRampPalette(c("blue", "white", "red"))(50),main = "Peptide Clustering Analysis" )
+
+write.csv2 (cluster8pep$kmeans$cluster, file="clustermember8pep.csv")
+
+```
+
+# Heatmap de 9 clusters
+```{r}
+cluster9pep= pheatmap(PCApep$x[,1:5], kmeans_k = 9,cluster_cols = FALSE, treeheight_row = 150, cellwidth = 15, color = colorRampPalette(c("blue", "white", "red"))(50),main = "Peptide Clustering Analysis" )
+
+write.csv2 (cluster9pep$kmeans$cluster, file="clustermember9pep.csv")
+
+```
+
+# Heatmap de 10 clusters
+```{r}
+cluster10pep= pheatmap(PCApep$x[,1:5], kmeans_k = 10,cluster_cols = FALSE, treeheight_row = 150, cellwidth = 15, color = colorRampPalette(c("blue", "white", "red"))(50),main = "Peptide Clustering Analysis" )
+
+write.csv2 (cluster10pep$kmeans$cluster, file="clustermember10pep.csv")
+
+```
+
+# Heatmap de 11 clusters
+```{r}
+cluster11pep= pheatmap(PCApep$x[,1:5], kmeans_k = 11,cluster_cols = FALSE, treeheight_row = 150, cellwidth = 15, color = colorRampPalette(c("blue", "white", "red"))(50),main = "Peptide Clustering Analysis" )
+
+write.csv2 (cluster11pep$kmeans$cluster, file="clustermember11pep.csv")
+
+```
+
+## Análisis de resultados tomados del heatmap de 11 clusters
+
+El primer set de resultados mostró que la mayor concentración de CSP-EX se
+encuentran en el cluster 7, junto con 27% de los péptidos antioxidantes lo que puede indicar que estos péptidos pueden tener potencial antioxidante. 
+
+
+En el cluster 7 el componente principal 2 es el predominante, los descriptores más sobresalientes son los vectores de Fasgai relacionados con los índices alifático y de hidrofobicidad y el punto isoeléctrico. Lo que significa que este cluster puede estar definido por la interacción con hidrógeno. Cluster 4 tiene 51% de los péptidos con actividad anticongelante, los péptidos CSP-EX en este cluster pueden tener potencial como péptidos anticongelantes.
+
+
+Cabe resaltar que los péptidos penetrantes de células (CPP) no mostraron una
+agrupación muy fuerte con los CSP-EX.
+
+
+## Análisis de Datos y componentes principales obtenidos
+
+
+# Importar y explorar archivo "Descriptores", generado de los datos obtenidos anteriormente
+```{r}
+Descriptores <- read_excel("Descriptores.xlsx")
+View(Descriptores)
+
+# cambiar algunos valores a factor
+Descriptores$Name <- as.factor(Descriptores$Name)
+Descriptores$Tipo <- as.factor(Descriptores$Tipo)
+str(Descriptores)
+```
+
+## Grafica de correlación, los datos son divididos para ver mejor la grafica, pero son usados todos juntos en la matris de correlación
+
+```{r warning=FALSE}
+
+pairs.panels(Descriptores[5:9])
+pairs.panels(Descriptores[10:14])
+pairs.panels(Descriptores[15:19])
+DescriptoresCor<-cor(Descriptores[5:19], method = "pearson")
+DescriptoresCor
+```
+
+## Análisis de componentes principales y obtencion de la varianza
+
+```{r}
+
+DescriptoresDF <- as.data.frame(Descriptores[,5:19])
+row.names(DescriptoresDF) <- Descriptores$Name
+head(DescriptoresDF)
+
+# Usando PCApep anterior
+
+get_eigenvalue(PCApep)
+fviz_eig(PCApep)
+fviz_pca
+
+```
+
+## Graficas de distribución con y sin elipses
+
+```{r}
+
+fviz_pca_ind(PCApep, repel = TRUE,
+             label = "none",
+             habillage = Descriptores$Tipo)
+
+fviz_pca_ind(PCApep, repel = TRUE,
+             label = "none",
+             habillage = Descriptores$Tipo,
+             addEllipses = TRUE) 
+
+fviz_pca_var(PCApep) 
+
+# Ambos
+
+fviz_pca_biplot(PCApep,
+                repel = TRUE,
+                label = "var",
+                habillage = Descriptores$Tipo)
+```
+
