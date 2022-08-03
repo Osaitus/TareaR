@@ -1,0 +1,334 @@
+---
+title: "Análisis de Componentes Principales"
+author: "Javier espinoza"
+date: '2022-05-25'
+output:
+  html_document: default
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+## Librerias usadas
+
+```{r Librerias, echo=TRUE, message=FALSE, warning=FALSE}
+library(factoextra)
+library(pheatmap)
+library(readxl)
+library(psych)
+library(ggplot2)
+library(vegan)
+```
+
+## Leer archivo 
+
+```{r}
+peptideDescriptors <-read_excel("C:/Users/javeb/Documents/R/TESIS/Descriptores.xlsx")
+peptideDescriptors$Tipo<-as.factor(peptideDescriptors$Tipo)
+peptideDescriptors$Name <- as.factor(peptideDescriptors$Name)
+summary(peptideDescriptors)
+```
+
+## Histogramas por descriptor
+
+# Descriptores
+
+aIndex = Indice alifatico
+
+Boman = indice de interacción potencial de proteinas de Boman
+
+Charge = Carga neta de una secuencia proteica
+
+# Propiedades de Cruciani
+
+PP1 = Polaridad 
+
+PP2 = Hidrofobicidad
+
+PP3 = Union de hidrogeno
+
+# Vectores de Fasgai
+
+F1 = Hidrofobicidad 
+
+F2 = propensidad de giro y alfa 
+
+F3 = propiedades "Bulky"
+
+F4 = Indice de caracteristicas composicionales
+
+F5 = Flexibilidad local
+
+F6 = Propiedades electronicas
+
+Hidrophobicity = hidrofobicidad
+
+pI = punto isoelectrico
+
+MW = Peso molecular 
+
+```{r}
+ggplot(peptideDescriptors, aes(x = aIndex, color = Tipo)) + geom_histogram()
+ggplot(peptideDescriptors, aes(x = Boman, color = Tipo)) + geom_histogram()
+ggplot(peptideDescriptors, aes(x = Charge, color = Tipo)) + geom_histogram()
+ggplot(peptideDescriptors, aes(x = PP1, color = Tipo)) + geom_histogram()
+ggplot(peptideDescriptors, aes(x = PP2, color = Tipo)) + geom_histogram()
+ggplot(peptideDescriptors, aes(x = PP3, color = Tipo)) + geom_histogram()
+ggplot(peptideDescriptors, aes(x = F1, color = Tipo)) + geom_histogram()
+ggplot(peptideDescriptors, aes(x = F2, color = Tipo)) + geom_histogram()
+ggplot(peptideDescriptors, aes(x = F3, color = Tipo)) + geom_histogram()
+ggplot(peptideDescriptors, aes(x = F4, color = Tipo)) + geom_histogram()
+ggplot(peptideDescriptors, aes(x = F5, color = Tipo)) + geom_histogram()
+ggplot(peptideDescriptors, aes(x = F6, color = Tipo)) + geom_histogram()
+ggplot(peptideDescriptors, aes(x = Hidrophobicity, color = Tipo)) + geom_histogram()
+ggplot(peptideDescriptors, aes(x = pI, color = Tipo)) + geom_histogram()
+ggplot(peptideDescriptors, aes(x = MW, color = Tipo)) + geom_histogram()
+
+```
+
+
+## Boxplot por descriptor
+```{r}
+ggplot(peptideDescriptors, aes(x=Tipo, y=aIndex, fill=Tipo)) + geom_boxplot()
+ggplot(peptideDescriptors, aes(x=Tipo, y=Boman, fill=Tipo)) + geom_boxplot()
+ggplot(peptideDescriptors, aes(x=Tipo, y=Charge, fill=Tipo)) + geom_boxplot()
+ggplot(peptideDescriptors, aes(x=Tipo, y=PP1, fill=Tipo)) + geom_boxplot()
+ggplot(peptideDescriptors, aes(x=Tipo, y=PP2, fill=Tipo)) + geom_boxplot()
+ggplot(peptideDescriptors, aes(x=Tipo, y=PP3, fill=Tipo)) + geom_boxplot()
+ggplot(peptideDescriptors, aes(x=Tipo, y=F1, fill=Tipo)) + geom_boxplot()
+ggplot(peptideDescriptors, aes(x=Tipo, y=F2, fill=Tipo)) + geom_boxplot()
+ggplot(peptideDescriptors, aes(x=Tipo, y=F3, fill=Tipo)) + geom_boxplot()
+ggplot(peptideDescriptors, aes(x=Tipo, y=F4, fill=Tipo)) + geom_boxplot()
+ggplot(peptideDescriptors, aes(x=Tipo, y=F5, fill=Tipo)) + geom_boxplot()
+ggplot(peptideDescriptors, aes(x=Tipo, y=F6, fill=Tipo)) + geom_boxplot()
+ggplot(peptideDescriptors, aes(x=Tipo, y=Hidrophobicity, fill=Tipo)) + geom_boxplot()
+ggplot(peptideDescriptors, aes(x=Tipo, y=pI, fill=Tipo)) + geom_boxplot()
+ggplot(peptideDescriptors, aes(x=Tipo, y=MW, fill=Tipo)) + geom_boxplot()
+
+```
+
+# Evaluación
+
+Al observar los histogramas y boxplots podemos determinar que existen valores atipicos, en los descriptores de Indice alifatico, carga, hidrofobicidad de las propiedades de cruciani. Y en especial en peso molecular. 
+
+Estos valores pueden deverse a la variacion de cada peptido, su composicion y extención, sin embargo estos valores seran tomados en cuenta para los proximos análisis y futura seleccion de descriptores. 
+
+
+# Escalamiento
+
+```{r}
+Descriptors= subset(peptideDescriptors, select = -c(Name, sequence, Tipo))
+pepscale = scale(Descriptors)
+summary(pepscale)
+```
+
+## Calculo de componentes principales y visualización
+
+```{r}
+PCApep = prcomp(pepscale)
+summary(PCApep)
+```
+
+## Para escoger el numero de PCAs
+
+```{r}
+stdev= PCApep$sdev
+pr_var = stdev^2
+pr_var[1:15] 
+prop_varex =pr_var/sum(pr_var)
+prop_varex[1:15]
+plot(prop_varex, xlab = "Principal Component",ylab = "Proportion of Variance Explained",type = "b")
+plot(cumsum(prop_varex), xlab = "Principal Component",ylab = "Cumulative Proportion of Variance Explained",type = "b")
+
+```
+
+
+## Se determina que los 5 primeros componentes principales seran usados para los calculos. 
+
+
+## Determinar numero optimo de clusters por medio del metodo de "avarage silhouette"
+
+```{r}
+fviz_nbclust(PCApep$x[ ,1:15],kmeans,method = "silhouette", k.max = 30, iter.max=25)
+
+```
+
+## Graficar los datos por medio de heatmap 
+# Para tener un calculo mas completo, se hacen heatmaps desde 3 clusters hasta 11 clusters y se evaluará el heatmap de 11 clusters
+
+# Heatmap de 3 clusters
+```{r}
+cluster3pep= pheatmap(PCApep$x[,1:5], kmeans_k = 3,cluster_cols = FALSE, treeheight_row = 150, cellwidth = 15, color = colorRampPalette(c("blue", "white", "red"))(50),main = "Peptide Clustering Analysis" )
+
+write.csv2 (cluster3pep$kmeans$cluster, file="clustermember3pep.csv")
+
+```
+
+# Heatmap de 4 clusters
+```{r}
+cluster4pep= pheatmap(PCApep$x[,1:5], kmeans_k = 4,cluster_cols = FALSE, treeheight_row = 150, cellwidth = 15, color = colorRampPalette(c("blue", "white", "red"))(50),main = "Peptide Clustering Analysis" )
+
+write.csv2 (cluster4pep$kmeans$cluster, file="clustermember4pep.csv")
+
+```
+
+# Heatmap de 5 clusters
+```{r}
+cluster5pep= pheatmap(PCApep$x[,1:5], kmeans_k = 5,cluster_cols = FALSE, treeheight_row = 150, cellwidth = 15, color = colorRampPalette(c("blue", "white", "red"))(50),main = "Peptide Clustering Analysis" )
+
+write.csv2 (cluster5pep$kmeans$cluster, file="clustermember5pep.csv")
+
+```
+
+# Heatmap de 6 clusters
+```{r}
+cluster6pep= pheatmap(PCApep$x[,1:5], kmeans_k = 6,cluster_cols = FALSE, treeheight_row = 150, cellwidth = 15, color = colorRampPalette(c("blue", "white", "red"))(50),main = "Peptide Clustering Analysis" )
+
+write.csv2 (cluster6pep$kmeans$cluster, file="clustermember6pep.csv")
+
+```
+
+# Heatmap de 7 clusters
+```{r}
+cluster7pep= pheatmap(PCApep$x[,1:5], kmeans_k = 7,cluster_cols = FALSE, treeheight_row = 150, cellwidth = 15, color = colorRampPalette(c("blue", "white", "red"))(50),main = "Peptide Clustering Analysis" )
+
+write.csv2 (cluster7pep$kmeans$cluster, file="clustermember7pep.csv")
+
+```
+
+# Heatmap de 8 clusters
+```{r}
+cluster8pep= pheatmap(PCApep$x[,1:5], kmeans_k = 8,cluster_cols = FALSE, treeheight_row = 150, cellwidth = 15, color = colorRampPalette(c("blue", "white", "red"))(50),main = "Peptide Clustering Analysis" )
+
+write.csv2 (cluster8pep$kmeans$cluster, file="clustermember8pep.csv")
+
+```
+
+# Heatmap de 9 clusters
+```{r}
+cluster9pep= pheatmap(PCApep$x[,1:5], kmeans_k = 9,cluster_cols = FALSE, treeheight_row = 150, cellwidth = 15, color = colorRampPalette(c("blue", "white", "red"))(50),main = "Peptide Clustering Analysis" )
+
+write.csv2 (cluster9pep$kmeans$cluster, file="clustermember9pep.csv")
+
+```
+
+# Heatmap de 10 clusters
+```{r}
+cluster10pep= pheatmap(PCApep$x[,1:5], kmeans_k = 10,cluster_cols = FALSE, treeheight_row = 150, cellwidth = 15, color = colorRampPalette(c("blue", "white", "red"))(50),main = "Peptide Clustering Analysis" )
+
+write.csv2 (cluster10pep$kmeans$cluster, file="clustermember10pep.csv")
+
+```
+
+# Heatmap de 11 clusters
+```{r}
+cluster11pep= pheatmap(PCApep$x[,1:5], kmeans_k = 11,cluster_cols = FALSE, treeheight_row = 150, cellwidth = 15, color = colorRampPalette(c("blue", "white", "red"))(50),main = "Peptide Clustering Analysis" )
+
+write.csv2 (cluster11pep$kmeans$cluster, file="clustermember11pep.csv")
+
+```
+
+## Análisis de resultados tomados del heatmap de 11 clusters
+
+El primer set de resultados mostró que la mayor concentración de CSP-EX se
+encuentran en el cluster 7, junto con 27% de los péptidos antioxidantes lo que puede indicar que estos péptidos pueden tener potencial antioxidante. 
+
+
+En el cluster 7 el componente principal 2 es el predominante, los descriptores más sobresalientes son los vectores de Fasgai relacionados con los índices alifático y de hidrofobicidad y el punto isoeléctrico. Lo que significa que este cluster puede estar definido por la interacción con hidrógeno. Cluster 4 tiene 51% de los péptidos con actividad anticongelante, los péptidos CSP-EX en este cluster pueden tener potencial como péptidos anticongelantes.
+
+
+Cabe resaltar que los péptidos penetrantes de células (CPP) no mostraron una
+agrupación muy fuerte con los CSP-EX.
+
+## Hipotesís, sobre los datos de estudio 
+
+Como el objetivo de estos datos es hacer un análisis de agrupamiento, es nesesario ver si estos datos contienen la suficiente diferencia para poder ser agrupados, es decir, si los centroides de los conjuntos podran diferir entre si. Es por esto que nuestra hipotesís se basará en el calculo de permanova cuyas hipotesís son:   
+
+H0= No existe diferencia entre los grupos.
+
+H1= Al menos dos grupos son diferentes.
+
+## Análisis de Datos y componentes principales obtenidos
+
+# Análisis permanova 
+
+Segun la documentación, los metodos de análisis no son confiables con datos negativos, por lo que se escogieron metodos que permitian entregar valores aunque el grupo contara con elementos negativos y se escogieron 3 metodos distintos para tener varios analisis y asi poder reforsar lo que se pueda encontrar
+
+```{r}
+
+DescriptorDF <- as.data.frame(Descriptors[,2:15])
+row.names(DescriptorDF) <- peptideDescriptors$Name
+head(DescriptorDF)
+
+DescriptorAdo1 <- adonis2(DescriptorDF ~ Tipo, method = "chord", data=peptideDescriptors, permutations=999)
+DescriptorAdo2 <- adonis2(DescriptorDF ~ Tipo, method = "euclidean", data=peptideDescriptors, permutations=999)
+DescriptorAdo3 <- adonis2(DescriptorDF ~ Tipo, method = "manhattan", data=peptideDescriptors, permutations=999)
+
+DescriptorAdo1
+DescriptorAdo2
+DescriptorAdo3
+
+```
+
+## Grafica de correlación, los datos son divididos para ver mejor la grafica, pero son usados todos juntos en la matris de correlación
+
+```{r warning=FALSE}
+
+pairs.panels(peptideDescriptors[5:9])
+pairs.panels(peptideDescriptors[10:14])
+pairs.panels(peptideDescriptors[15:19])
+DescriptoresCor<-cor(peptideDescriptors[5:19], method = "pearson")
+DescriptoresCor
+```
+
+## Análisis de componentes principales y obtencion de la varianza
+
+```{r}
+
+DescriptoresDF <- as.data.frame(peptideDescriptors[,5:19])
+row.names(DescriptoresDF) <- peptideDescriptors$Name
+head(DescriptoresDF)
+
+get_eigenvalue(PCApep)
+fviz_eig(PCApep)
+fviz_pca
+
+```
+
+## Graficas de distribución con y sin elipses
+
+```{r}
+
+fviz_pca_ind(PCApep, repel = TRUE,
+             label = "none",
+             habillage = peptideDescriptors$Tipo)
+
+fviz_pca_ind(PCApep, repel = TRUE,
+             label = "none",
+             habillage = peptideDescriptors$Tipo,
+             addEllipses = TRUE) 
+
+fviz_pca_var(PCApep, repel = TRUE) 
+
+# Ambos
+
+fviz_pca_biplot(PCApep,
+                repel = TRUE,
+                label = "var",
+                habillage = peptideDescriptors$Tipo)
+```
+
+## Evaluación 
+
+Segun lo encontrado por los tres metodos distintos podemos rechazar H0 y determinar que existe algun grado de diferencia que permitiria la agrupacion.
+
+Según lo observado con los heatmaps, la agrupación de los datos permite un cierto grado de dicernimiento entre los grupos y nos indica un camino a seguir para refinar nuestro análisis, esto sumado a lo observado con el análisis de componentes principales, nos lleva a decir que podriamos cambiar algunos de los descriptores seleccionados, 3 de los 4 cuadrantes del grafico se encuentran bien poblados, mientras que el cuadrante restante solo contiene a la flexibilidad local de los vectores de Fasgai, esto junto al posicionamiento de los descriptores en los otros cuadrantes (siendo estos muy cercanos entre si, con poca dispersion dentro del grafico) nos da la confianza de buscar nuevos descriptores para agregar o reemplazar a los ya existentes.
+
+Existen formas de encontrar los elementos especificos que producen valores atipicos, los pruebas estadisticas de Grubb, Dixon y Rosner nos pueden ayudar a obtener esa informacion, sin embargo para estos datos en particular, los elementos son dificiles de obtener, por lo que resulta mas probechoso cambiar los descriptores que eliminar peptidos, por esto y por lo explicado anterirormente, se determina que una busqueda de otros descriptores permitira tener un mejor set de datos y un mejor mejor set de variables para el agrupamiento, estos datos preliminares nos dan luz sobre que podemos cambiar o de que podemos precindir, lo cual ayudara en gran manera a nuestro trabajo.
+
+
+
+

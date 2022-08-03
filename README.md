@@ -28,3 +28,12 @@ Peptides (https://github.com/dosorio/Peptides/)
 1. Archivo excel "Lista calculo" que contiene las secuencias de todos los peptidos utilizados
 2. Archivo excel "Descriptores" que contiene una lista de los peptidos con los valores de clasificacion y los valores de los descriptores seleccionados
 3. Archivo HTLM "Análisis Agrupamiento" que contiene el codigo utilizado y los resultados
+
+**Proyecto**
+
+Para la entrega del proyecto se hicieron cambios al exploratorio
+
+1. Se agregaron histogramas y boxplots para cada descriptor y se observaron valores atipicos
+2. no se muestra la obtención de los valores de cada descriptor, en esta oportunidad, se toma el archivo con los valores ya agregados, ya que este paso esta fuera del exploratorio por lo que no se encontro nesesario agregarlo
+
+Como hipotesís del proyecto se analizará la capacidad de los datos de formar varios grupos disintos con un análisis de Permanova, de este se tomaran las hipotesís a verificar 
